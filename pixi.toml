@@ -1,0 +1,46 @@
+[workspace]
+authors = ["Sean McKinney <jouyun@gmail.com>"]
+channels = ["conda-forge"]
+name = "organoid-screen-analysis"
+description = "Notebooks A-D: background, montage, quantification, display"
+# win-64: A, B, D (napari, local drives); linux-64: C on the SLURM cluster
+platforms = ["win-64", "linux-64"]
+version = "0.1.0"
+
+[tasks]
+lab = "jupyter lab"
+
+[dependencies]
+python = "3.11.*"
+numpy = "*"
+scipy = "*"
+pandas = "*"
+scikit-image = "*"
+tifffile = "*"
+imagecodecs = "*"          # needed to read the zstd-compressed label TIFFs
+opencv = "*"               # cv2 (top-hat background subtraction)
+plotly = "*"
+anywidget = "*"            # plotly FigureWidget click callbacks in D
+ipywidgets = "*"
+jupyterlab = "*"
+ipykernel = "*"
+napari = "*"
+pyqt = "*"
+dask = "*"
+distributed = "*"
+dask-jobqueue = "*"        # SLURMCluster in C
+
+# Optional: only the Cellpose scratch cells at the bottom of B need this.
+# Use with: pixi run -e cellpose lab
+[feature.cellpose.pypi-options]
+extra-index-urls = ["https://download.pytorch.org/whl/cu128"]
+
+[feature.cellpose.pypi-dependencies]
+torch = ">=2.7"
+cellpose = ">=4"
+
+[feature.cellpose.activation.env]
+KMP_DUPLICATE_LIB_OK = "TRUE"
+
+[environments]
+cellpose = ["cellpose"]

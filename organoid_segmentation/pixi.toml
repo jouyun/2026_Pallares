@@ -1,0 +1,29 @@
+[workspace]
+authors = ["Sean McKinney <jouyun@gmail.com>"]
+channels = ["conda-forge"]
+name = "organoids"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.11.*"
+numpy = "*"
+tifffile = "*"
+scikit-image = "*"
+matplotlib = "*"
+zarr = "*"
+imagecodecs = "*"
+scikit-learn = ">=1.9.0,<2"
+
+[pypi-options]
+extra-index-urls = ["https://download.pytorch.org/whl/cu128"]
+
+[pypi-dependencies]
+torch = ">=2.7"
+torchvision = ">=0.26"
+cellpose = ">=4"
+
+[activation.env]
+KMP_DUPLICATE_LIB_OK = "TRUE"
